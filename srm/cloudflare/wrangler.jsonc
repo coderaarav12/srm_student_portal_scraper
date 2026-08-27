@@ -15,12 +15,6 @@
       }
     ]
   },
-  "kv_namespaces": [
-    {
-      "binding": "CACHE",
-      "id": "your-kv-namespace-id"
-    }
-  ],
   "migrations": [
     {
       "tag": "v1",

@@ -281,14 +281,7 @@ export class SrmSession extends DurableObject<Env> {
         internalMarksOutput: result.internalMarksOutput,
       };
 
-      if (this.cache instanceof Map) {
-        this.cache.set(`portaldata:${sessionId}`, JSON.stringify(cacheEntry));
-      } else {
-        await this.cache.put(`portaldata:${sessionId}`, JSON.stringify(cacheEntry), {
-          expirationTtl: CACHE_TTL_SECONDS,
-        });
-      }
-
+      await this.ctx.storage.put(`portaldata:${sessionId}`, JSON.stringify(cacheEntry));
       await this.ctx.storage.delete(`portalsession:${sessionId}`);
       await this.setAlarm();
 
@@ -330,9 +323,7 @@ export class SrmSession extends DurableObject<Env> {
       return jsonResponse({ success: false, error: "sessionId parameter is required" }, 400, headers);
     }
 
-    const cached = this.cache instanceof Map
-      ? this.cache.get(`portaldata:${sessionId}`)
-      : await this.cache.get(`portaldata:${sessionId}`);
+    const cached = await this.ctx.storage.get<string>(`portaldata:${sessionId}`);
 
     if (cached) {
       const entry: CacheEntry = JSON.parse(cached);
@@ -356,9 +347,7 @@ export class SrmSession extends DurableObject<Env> {
       return jsonResponse({ success: false, error: "sessionId parameter is required" }, 400, headers);
     }
 
-    const cached = this.cache instanceof Map
-      ? this.cache.get(`portaldata:${sessionId}`)
-      : await this.cache.get(`portaldata:${sessionId}`);
+    const cached = await this.ctx.storage.get<string>(`portaldata:${sessionId}`);
 
     if (cached) {
       const entry: CacheEntry = JSON.parse(cached);
@@ -382,9 +371,7 @@ export class SrmSession extends DurableObject<Env> {
       return jsonResponse({ success: false, error: "sessionId parameter is required" }, 400, headers);
     }
 
-    const cached = this.cache instanceof Map
-      ? this.cache.get(`portaldata:${sessionId}`)
-      : await this.cache.get(`portaldata:${sessionId}`);
+    const cached = await this.ctx.storage.get<string>(`portaldata:${sessionId}`);
 
     if (cached) {
       const entry: CacheEntry = JSON.parse(cached);
@@ -397,7 +384,7 @@ export class SrmSession extends DurableObject<Env> {
       }, 200, headers);
     }
 
-    return jsonResponse({ success: false, error: "No active or cached session found" }, 404, headers);
+    return jsonResponse({ success: false, error: "No active or cached session found", sessionExpired: true }, 401, headers);
   }
 
   private async handleLogout(request: Request): Promise<Response> {
