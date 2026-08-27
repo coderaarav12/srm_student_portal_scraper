@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build & Logs
+dist/
+build/
+output/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.wrangler/
+
+# Environment and local configs
+.env
+.env.*
+!.env.example
+*.local.json
+credentials.local.json
+
+# OS and Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+scratch/

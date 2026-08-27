@@ -1,0 +1,26 @@
+{
+  "name": "srm-portal-scraper",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/main.ts",
+    "login": "tsx src/main.ts --login",
+    "http": "tsx src/main.ts --http",
+    "discover": "tsx src/main.ts --discover",
+    "choose": "tsx src/main.ts --choose",
+    "server": "tsx src/fresh-attendance.ts",
+    "dev": "tsx src/fresh-attendance.ts",
+    "py:login": "py -3 python/srm_attendance_bot.py login",
+    "py:attendance": "py -3 python/srm_attendance_bot.py attendance",
+    "observe:portal": "tsx portal-investigation/observe.ts"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "playwright": "^1.55.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

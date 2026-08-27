@@ -1,0 +1,22 @@
+{
+  "name": "srm-portal-scraper-worker",
+  "private": true,
+  "version": "2.0.0",
+  "description": "Production-ready SRM attendance scraper with auto-captcha, caching, session pooling, and queue.",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@cloudflare/playwright": "^1.3.0",
+    "cheerio": "^1.1.0",
+    "tesseract.js": "^5.1.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260815.1",
+    "typescript": "^5.6.0",
+    "wrangler": "^4.11.1"
+  }
+}

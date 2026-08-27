@@ -1,0 +1,30 @@
+{
+  "name": "srm-portal-scraper",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-19",
+  "compatibility_flags": ["nodejs_compat"],
+  "upload_source_maps": true,
+  "browser": {
+    "binding": "BROWSER"
+  },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "SRM_SESSION",
+        "class_name": "SrmSession"
+      }
+    ]
+  },
+  "kv_namespaces": [
+    {
+      "binding": "CACHE",
+      "id": "your-kv-namespace-id"
+    }
+  ],
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["SrmSession"]
+    }
+  ]
+}
